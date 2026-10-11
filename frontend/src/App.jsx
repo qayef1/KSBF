@@ -1,6 +1,7 @@
 import Works from "./pages/Works";
 import Login from "./pages/Login";
 import ArticleDetail from "./pages/ArticleDetail";
+import Contact from "./pages/Contact";
 
 function Navbar() {
     return (
@@ -83,6 +84,7 @@ function App() {
                 {path === "/" && <Home />}
                 {path === "/works" && <Works />}
                 {path === "/article-detail.html" && <ArticleDetail />}
+                {path === "/contact" && <Contact />}
                 {path === "/admin" && <Login />}
 
             </div>

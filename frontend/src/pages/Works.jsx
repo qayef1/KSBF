@@ -10,7 +10,7 @@ function Works() {
     return (
         <section className="mt-16 mb-16">
             <h1 className="mb-8 text-2xl font-semibold">
-                works
+                // works //
             </h1>
 
             <ul className="divide-y divide-neutral-800">

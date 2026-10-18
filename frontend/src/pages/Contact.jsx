@@ -1,43 +1,35 @@
+import { useEffect } from "react";
+
 function Contact() {
-    return (
-        <main className="mt-10 mb-20">
+    useEffect(() => {
+        const $ = window.jQuery;
 
+        if (!$) {
+            return;
+        }
 
-            <p className="mb-5 leading-relaxed">
-                Bagi jurnalis, relawan, atau individu yang membutuhkan bantuan
-                terkait anonimitas dan privasi, bisa menghubungi saya.
-                Sangat disarankan untuk encrypt isi emailnya menggunakan PGP key.
-            </p>
+        let visible = false;
 
-            <p className="mb-8">
-                Email: <a href="mailto:ivabel@proton.me">ivabel@proton.me</a>
-            </p>
+        function toggleKey() {
+            if (visible) {
+                $("#pgp-key").hide();
+                $("#pgp-button").text("Show Public Key");
+                visible = false;
+            } else {
+                $("#pgp-key").show();
+                $("#pgp-button").text("Hide Public Key");
+                visible = true;
+            }
+        }
 
-            <section>
-                <h2 className="mb-4 text-xl font-semibold">
-                    PGP Public Key
-                </h2>
+        $("#pgp-button").click(toggleKey);
 
-                <div className="mb-5">
-                    <p><b>Key type:</b> RSA 4096</p>
-                    <p className="break-all">
-                        <b>Fingerprint:</b> 9816C4D421933B5F737E1AF1CD47741A2613DB72
-                    </p>
-                    <p>
-                        <b>UID:</b> ivabel (nobody) &lt;ivabel@proton.me&gt;
-                    </p>
-                </div>
+        return () => {
+            $("#pgp-button").off("click", toggleKey);
+        };
+    }, []);
 
-                <label htmlFor="pgp-key" className="mb-2 block">
-                    Public Key:
-                </label>
-
-                <textarea
-                    id="pgp-key"
-                    rows="15"
-                    readOnly
-                    className="w-full rounded border border-neutral-700 bg-neutral-950 p-4 font-mono text-xs text-gray-300"
-                    value={`-----BEGIN PGP PUBLIC KEY BLOCK-----
+    const publicKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQINBGq5PusBEACw2UF5GjLnwhiqpEXQi6QyqLJqL4NXi+XMlRCzH3OOmdKEVAin
 gW+um7J3Xr37XqdXjf0RFr1Yddd/O3apo6yyEFzMNeLFs5SiPCGHNeOLT4PM/Rzi
@@ -87,8 +79,54 @@ pRw+PsFYeSUeYE2FQjDGdc/UFfTtC73tqlxSGdLnYL1m3Puge2jSXYrETq153cA/
 /owraEHfSp92wUNNFMra9QVJp5t4fHeb9kTHlSCJkDmKwJClT1gUz/pxWka6eX1H
 JiRy7vXkMvYm9+JT1+MdnUyVmc8qEquRqSoIVVoKDEYpOPnQaJuB4LOfnNs0RCA=
 =loN6
+-----END PGP PUBLIC KEY BLOCK-----`;
 
------END PGP PUBLIC KEY BLOCK-----`}
+    return (
+        <main className="mt-16 mb-20">
+            <h1 className="mb-8 text-2xl font-semibold">
+                Contact
+            </h1>
+
+            <p className="mb-5 leading-relaxed">
+                Bagi jurnalis, relawan, atau individu yang membutuhkan bantuan
+                terkait anonimitas dan privasi, bisa menghubungi saya.
+                Sangat disarankan untuk encrypt isi emailnya menggunakan PGP key.
+            </p>
+
+            <p className="mb-8">
+                Email: <a href="mailto:ivabel@proton.me">ivabel@proton.me</a>
+            </p>
+
+            <section>
+                <h2 className="mb-4 text-xl font-semibold">
+                    PGP Public Key
+                </h2>
+
+                <div className="mb-5">
+                    <p><b>Key type:</b> RSA 4096</p>
+                    <p className="break-all">
+                        <b>Fingerprint:</b> 9816C4D421933B5F737E1AF1CD47741A2613DB72
+                    </p>
+                    <p>
+                        <b>UID:</b> ivabel (nobody) &lt;ivabel@proton.me&gt;
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="pgp-button"
+                    className="rounded-full border border-neutral-700 px-4 py-2 text-sm text-gray-300 hover:text-white"
+                >
+                    Show Public Key
+                </button>
+
+                <textarea
+                    id="pgp-key"
+                    rows="15"
+                    readOnly
+                    style={{ display: "none" }}
+                    className="mt-4 w-full rounded border border-neutral-700 bg-neutral-950 p-4 font-mono text-xs text-gray-300"
+                    value={publicKey}
                 />
             </section>
         </main>

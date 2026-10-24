@@ -9,7 +9,7 @@ function Contact() {
         }
 
         let visible = false;
-
+        
         function toggleKey() {
             if (visible) {
                 $("#pgp-key").hide();

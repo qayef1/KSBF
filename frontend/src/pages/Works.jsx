@@ -1,26 +1,15 @@
-import { useEffect } from "react";
-import { showArticles } from "../script";
+import ArticleCount from "../components/ArticleCount";
+import ArticleList from "../components/ArticleList";
 
-function Works() {
-    useEffect(() => {
-        showArticles();
-    }, []);
-
+function Works(props) {
     return (
         <section className="mt-16 mb-16">
             <h1 className="mb-8 text-2xl font-semibold">
                 works
             </h1>
 
-            <p
-                id="article-count"
-                className="mb-4 text-sm text-gray-400"
-            ></p>
-
-            <ul
-                id="article-list"
-                className="divide-y divide-neutral-800"
-            ></ul>
+            <ArticleCount jumlah={props.articles.length} />
+            <ArticleList articles={props.articles} onNavigate={props.onNavigate} />
         </section>
     );
 }

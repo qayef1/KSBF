@@ -4,6 +4,7 @@ import Works from "./pages/Works";
 import Login from "./pages/Login";
 import ArticleDetail from "./pages/ArticleDetail";
 import Contact from "./pages/Contact";
+import Breaches from "./pages/Breaches";
 
 function Home(props) {
     return (
@@ -125,6 +126,7 @@ function App() {
                 {path === "/works" && <Works articles={articles} onNavigate={navigate} />}
                 {path === "/article-detail.html" && <ArticleDetail onNavigate={navigate} />}
                 {path === "/contact" && <Contact />}
+                {path === "/breaches" && <Breaches />}
                 {path === "/admin" && (
                     <Login
                         judulBaru={judulBaru}
